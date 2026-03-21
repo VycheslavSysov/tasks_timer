@@ -3,14 +3,38 @@ import formatTime from "../utils/formatTime.js";
 
 function Timer() {
   const [taskName, setTaskName] = useState('');
-  const [isRunning, setIsRunning] = useState(false);
-  const [startTime, setStartTime] = useState(null);
-  const [elapsedSeconds, setElapsedSeconds] = useState(0);
-  const [tasks, setTasks] = useState([]);
+  const [isRunning, setIsRunning] = useState(() => {
+    return localStorage.getItem("isRunning") === "true";
+  });
+  const [startTime, setStartTime] = useState(() => {
+    const saved = localStorage.getItem("startTime");
+    if (saved === null) {
+      return null
+    }
+    return Number(saved);
+  });
+  const [elapsedSeconds, setElapsedSeconds] = useState(() => {
+    const savedStart = localStorage.getItem("startTime");
+    const savedIsRunning = localStorage.getItem("isRunning");
+    if (savedStart === null || savedIsRunning !== "true") {
+      return 0;
+    }
+    return Math.floor((Date.now() - Number(savedStart)) / 1000)
+  });
+  const [tasks, setTasks] = useState(() => {
+    const saved = localStorage.getItem("tasks");
+    if (saved === null) {
+      return [];
+    }
+    return JSON.parse(saved);
+  });
 
   const handleStart = () => {
-    setStartTime(Date.now());
+    const now = Date.now()
+    setStartTime(now);
     setIsRunning(true);
+    localStorage.setItem("startTime", now)
+    localStorage.setItem("isRunning", "true");
   }
 
   const handleStop = () => {
@@ -31,6 +55,8 @@ function Timer() {
     setTaskName('');
     setStartTime(null);
     setIsRunning(false);
+    localStorage.removeItem("isRunning");
+    localStorage.removeItem("startTime");
   }
 
   useEffect(() => {
@@ -38,10 +64,14 @@ function Timer() {
       return;
     }
     const interval = setInterval(() => {
-      setElapsedSeconds(previous => previous + 1)
+      setElapsedSeconds(Math.floor((Date.now() - startTime) / 1000));
     }, 1000);
     return () => clearInterval(interval)
-  }, [isRunning])
+  }, [isRunning, startTime]);
+
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks))
+  }, [tasks])
 
 
   return (
