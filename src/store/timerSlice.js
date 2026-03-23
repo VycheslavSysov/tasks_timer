@@ -1,12 +1,16 @@
 import {createSlice} from '@reduxjs/toolkit';
 
+const initialState = () => {
+  return {
+    isRunning: localStorage.getItem('isRunning') === 'true',
+    startTime: Number(localStorage.getItem('startTime')) || null,
+  };
+};
+
 const timerSlice = createSlice({
   name: 'timer',
-  initialState: {
-    isRunning: false,
-    startTime: null,
-    taskName: '',
-  },
+  initialState: initialState(),
+
   reducers: {
     startTimer: (state, action) => {
       state.startTime = action.payload;

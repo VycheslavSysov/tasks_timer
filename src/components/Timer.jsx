@@ -1,40 +1,23 @@
 import {useState, useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {startTimer, stopTimer} from "../store/timerSlice.js";
+import {addTask} from "../store/tasksSlice.js";
 import formatTime from "../utils/formatTime.js";
 
 function Timer() {
+  const dispatch = useDispatch();
+  const isRunning  = useSelector(state => state.timer.isRunning);
+  const startTime = useSelector(state => state.timer.startTime);
+
   const [taskName, setTaskName] = useState('');
-  const [isRunning, setIsRunning] = useState(() => {
-    return localStorage.getItem("isRunning") === "true";
-  });
-  const [startTime, setStartTime] = useState(() => {
-    const saved = localStorage.getItem("startTime");
-    if (saved === null) {
-      return null
-    }
-    return Number(saved);
-  });
   const [elapsedSeconds, setElapsedSeconds] = useState(() => {
-    const savedStart = localStorage.getItem("startTime");
-    const savedIsRunning = localStorage.getItem("isRunning");
-    if (savedStart === null || savedIsRunning !== "true") {
-      return 0;
-    }
-    return Math.floor((Date.now() - Number(savedStart)) / 1000)
-  });
-  const [tasks, setTasks] = useState(() => {
-    const saved = localStorage.getItem("tasks");
-    if (saved === null) {
-      return [];
-    }
-    return JSON.parse(saved);
+    if (!isRunning || startTime === null) return 0;
+    return Math.floor((Date.now() - startTime) / 1000);
   });
 
   const handleStart = () => {
     const now = Date.now()
-    setStartTime(now);
-    setIsRunning(true);
-    localStorage.setItem("startTime", now)
-    localStorage.setItem("isRunning", "true");
+    dispatch(startTimer(now));
   }
 
   const handleStop = () => {
@@ -42,21 +25,16 @@ function Timer() {
       alert('Введи назву задачі!')
       return;
     }
-    const newTask = {
+    dispatch(addTask({
       id: Date.now(),
       name: taskName,
       startTime: startTime,
       endTime: Date.now(),
       duration: elapsedSeconds,
-    }
-    setTasks(previous => [...previous, newTask]);
-
+    }));
+    dispatch(stopTimer());
     setElapsedSeconds(0);
     setTaskName('');
-    setStartTime(null);
-    setIsRunning(false);
-    localStorage.removeItem("isRunning");
-    localStorage.removeItem("startTime");
   }
 
   useEffect(() => {
@@ -68,10 +46,6 @@ function Timer() {
     }, 1000);
     return () => clearInterval(interval)
   }, [isRunning, startTime]);
-
-  useEffect(() => {
-    localStorage.setItem('tasks', JSON.stringify(tasks))
-  }, [tasks])
 
 
   return (

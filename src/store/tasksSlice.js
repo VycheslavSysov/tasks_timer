@@ -1,8 +1,13 @@
-import { createSlice } from '@reduxjs/toolkit';
+import {createSlice} from '@reduxjs/toolkit';
+
+const initialState = () => {
+    const saved = localStorage.getItem('tasks');
+    return saved ? JSON.parse(saved) : [];
+  };
 
 const tasksSlice = createSlice({
   name: 'tasks',
-  initialState: [],
+  initialState: initialState(),
   reducers: {
     addTask: (state, action) => {
       state.push(action.payload);
