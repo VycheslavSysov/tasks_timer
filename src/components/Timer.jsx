@@ -4,6 +4,7 @@ import {startTimer, stopTimer} from "../store/timerSlice.js";
 import {addTask} from "../store/tasksSlice.js";
 import formatTime from "../utils/formatTime.js";
 
+
 function Timer() {
   const dispatch = useDispatch();
   const isRunning  = useSelector(state => state.timer.isRunning);
