@@ -1,5 +1,5 @@
-import {Link, useLocation, Routes, Route} from "react-router-dom";
-import {Tabs, Tab} from "@mui/material";
+import {useLocation, Routes, Route, useNavigate} from "react-router-dom";
+import {Tabs, TabsList, TabsTrigger} from "@/components/ui/tabs.jsx";
 import TimerPage from "./pages/TimerPage";
 import LogPage from "./pages/LogPage";
 import NotFoundPage from "./pages/NotFoundPage";
@@ -7,12 +7,17 @@ import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
   const location = useLocation();
+  const navigate = useNavigate();
 
   return (
       <>
-        <Tabs value={location.pathname}>
-          <Tab label="Таймер" value="/" component={Link} to="/" />
-          <Tab label="Лог" value="/log" component={Link} to="/log" />
+        <Tabs
+            value={location.pathname} onValueChange={(value) => navigate(value)}
+        >
+          <TabsList>
+            <TabsTrigger value="/">Таймер</TabsTrigger>
+            <TabsTrigger value="/log">Лог</TabsTrigger>
+          </TabsList>
         </Tabs>
         <Routes>
           <Route path="/" element={<TimerPage />} />

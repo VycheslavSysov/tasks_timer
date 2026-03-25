@@ -1,10 +1,12 @@
+import formatTime from "@/utils/formatTime.js";
 import {
   Table,
+  TableHeader,
   TableBody,
-  TableCell,
   TableHead,
-  TableRow
-} from '@mui/material';
+  TableRow,
+  TableCell
+} from "@/components/ui/table.jsx";
 import {useSelector} from "react-redux";
 
 export default function LogPage() {
@@ -13,15 +15,15 @@ export default function LogPage() {
   return (
       <div>
         <Table>
-          <TableHead>
+          <TableHeader>
             <TableRow>
-              <TableCell>#</TableCell>
-              <TableCell>Назва</TableCell>
-              <TableCell>Початок</TableCell>
-              <TableCell>Кінець</TableCell>
-              <TableCell>Тривалість</TableCell>
+              <TableHead>#</TableHead>
+              <TableHead>Назва</TableHead>
+              <TableHead>Початок</TableHead>
+              <TableHead>Кінець</TableHead>
+              <TableHead>Тривалість</TableHead>
             </TableRow>
-          </TableHead>
+          </TableHeader>
           <TableBody>
             {tasks.map((task, index) => (
                 <TableRow key={task.id}>
@@ -29,7 +31,7 @@ export default function LogPage() {
                   <TableCell>{task.name}</TableCell>
                   <TableCell>{new Date(task.startTime).toLocaleTimeString()}</TableCell>
                   <TableCell>{new Date(task.endTime).toLocaleTimeString()}</TableCell>
-                  <TableCell>{task.duration}</TableCell>
+                  <TableCell>{formatTime(task.duration)}</TableCell>
                 </TableRow>
             ))}
           </TableBody>
