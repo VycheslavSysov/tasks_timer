@@ -8,9 +8,11 @@ import {
   TableCell
 } from "@/components/ui/table.jsx";
 import {useSelector} from "react-redux";
+import {useNavigate} from "react-router-dom";
 
 export default function LogPage() {
   const tasks = useSelector(state => state.tasks);
+  const navigate = useNavigate();
 
   return (
       <div>
@@ -26,7 +28,7 @@ export default function LogPage() {
           </TableHeader>
           <TableBody>
             {tasks.map((task, index) => (
-                <TableRow key={task.id}>
+                <TableRow key={task.id} onClick={() => navigate(`/tasks/${task.id}`)}>
                   <TableCell>{index + 1}</TableCell>
                   <TableCell>{task.name}</TableCell>
                   <TableCell>{new Date(task.startTime).toLocaleTimeString()}</TableCell>
