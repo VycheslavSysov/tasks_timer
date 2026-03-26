@@ -65,10 +65,18 @@ export default function LogPage() {
                       <TableCell>{new Date(task.endTime).toLocaleTimeString()}</TableCell>
                       <TableCell>{formatTime(task.duration)}</TableCell>
                       <TableCell>
-                        <button onClick={() => navigate(`/tasks/${task.id}`)}>INFO</button>
+                        <button
+                            onClick={() => navigate(`/tasks/${task.id}`)}
+                            className="h-7 min-w-16 rounded-[2px] border border-slate-200 bg-white px-3 text-[11px] font-semibold text-blue-600 shadow-[0_1px_2px_rgba(0,0,0,0.12)] hover:bg-slate-50"
+                        >INFO
+                        </button>
                       </TableCell>
                       <TableCell>
-                        <button onClick={() => dispatch(deleteTask(task.id))}>DELETE</button>
+                        <button
+                            onClick={() => dispatch(deleteTask(task.id))}
+                            className="h-7 min-w-16 rounded-[2px] border border-slate-200 bg-white px-3 text-[11px] font-semibold text-blue-600 shadow-[0_1px_2px_rgba(0,0,0,0.12)] hover:bg-slate-50"
+                        >DELETE
+                        </button>
                       </TableCell>
                     </TableRow>
                 ))}
@@ -77,19 +85,21 @@ export default function LogPage() {
         )}
 
         {location.pathname === '/log/chart' && (
-        <ResponsiveContainer width="100%" height={300}>
-          <BarChart data={chartData}>
-            <XAxis dataKey="hour" />
-            <YAxis />
-            <Tooltip />
-            <Bar dataKey="minutes" fill="#94a3b8" />
-          </BarChart>
-        </ResponsiveContainer>
-      )}
+            <ResponsiveContainer width="100%" height={300}>
+              <BarChart data={chartData}>
+                <XAxis dataKey="hour" />
+                <YAxis />
+                <Tooltip />
+                <Bar dataKey="minutes" fill="#94a3b8" />
+              </BarChart>
+            </ResponsiveContainer>
+        )}
 
-        <div style={{textAlign: 'right', marginTop: '16px'}}>
-          <button onClick={handleGenerate}>GENERATE</button>
-        </div>
+        {location.pathname === '/log/chart' && (
+            <div style={{textAlign: 'right', marginTop: '16px'}}>
+              <button onClick={handleGenerate}>GENERATE</button>
+            </div>
+        )}
       </div>
   );
 }

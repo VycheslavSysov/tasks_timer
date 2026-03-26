@@ -57,7 +57,6 @@ return (
         placeholder="Name of your task"
         className="border-b border-gray-400 text-center text-blue-700 outline-none w-64 pb-1"
     />
-
     <div className="w-52 h-52 rounded-full border-4 border-gray-200 shadow-lg flex items-center justify-center">
       <span className="text-3xl font-mono text-blue-700">
         {formatTime(elapsedSeconds)}
