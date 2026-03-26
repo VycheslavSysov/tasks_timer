@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/table.jsx";
 import {useDispatch, useSelector} from "react-redux";
 import {useLocation, useNavigate} from "react-router-dom";
-import {addTask, clearTasks} from "@/store/tasksSlice.js";
+import {addTask, clearTasks, deleteTask} from "@/store/tasksSlice.js";
 import generateTask from "@/utils/generateTask.js";
 import groupTasksByHour from "@/utils/groupTasksByHour.js";
 import {Tabs, TabsList, TabsTrigger} from "@/components/ui/tabs.jsx";
@@ -54,24 +54,31 @@ export default function LogPage() {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>#</TableHead>
-                  <TableHead>Назва</TableHead>
-                  <TableHead>Початок</TableHead>
-                  <TableHead>Кінець</TableHead>
-                  <TableHead>Тривалість</TableHead>
+                  <TableHead>№</TableHead>
+                  <TableHead>Task</TableHead>
+                  <TableHead>Time start</TableHead>
+                  <TableHead>Time end</TableHead>
+                  <TableHead>Time spend</TableHead>
+                  <TableHead>Info</TableHead>
+                  <TableHead>Delete</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {tasks.map((task, index) => (
                     <TableRow
                         key={task.id}
-                        onClick={() => navigate(`/tasks/${task.id}`)}
                     >
                       <TableCell>{index + 1}</TableCell>
                       <TableCell>{task.name}</TableCell>
                       <TableCell>{new Date(task.startTime).toLocaleTimeString()}</TableCell>
                       <TableCell>{new Date(task.endTime).toLocaleTimeString()}</TableCell>
                       <TableCell>{formatTime(task.duration)}</TableCell>
+                      <TableCell>
+                        <button onClick={() => navigate(`/tasks/${task.id}`)}>INFO</button>
+                      </TableCell>
+                      <TableCell>
+                        <button onClick={() => dispatch(deleteTask(task.id))}>DELETE</button>
+                      </TableCell>
                     </TableRow>
                 ))}
               </TableBody>
