@@ -5,7 +5,6 @@ import TimerPage from "./pages/TimerPage";
 import LogPage from "./pages/LogPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
-
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
