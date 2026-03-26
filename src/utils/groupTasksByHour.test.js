@@ -30,7 +30,7 @@ test(() => {
   expect(result[16].minutes).toBe(15);
 });
 
-test(() => {
+test('порожній масив повертає 24 нульових години', () => {
   const result = groupTasksByHour([]);
 
   expect(result).toHaveLength(24);
