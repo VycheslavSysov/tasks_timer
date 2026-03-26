@@ -41,15 +41,6 @@ export default function LogPage() {
 
   return (
       <div>
-        <Tabs
-            value={location.pathname} onValueChange={(value) => navigate(value)}
-        >
-          <TabsList>
-            <TabsTrigger value="/log">TASKS LOG</TabsTrigger>
-            <TabsTrigger value="/log/chart">TASKS CHART</TabsTrigger>
-          </TabsList>
-        </Tabs>
-
         {location.pathname === "/log" && (
             <Table>
               <TableHeader>
