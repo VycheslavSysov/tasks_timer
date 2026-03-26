@@ -1,6 +1,6 @@
 import groupTasksByHour from './groupTasksByHour';
 
-test('задача в одній годині', () => {
+test(() => {
   const start = new Date('2026-03-26T10:15:00').getTime();
   const end = new Date('2026-03-26T10:45:00').getTime();
 
@@ -9,7 +9,7 @@ test('задача в одній годині', () => {
   expect(result[10].minutes).toBe(30);
 });
 
-test('задача перекриває дві години', () => {
+test(() => {
   const start = new Date('2026-03-26T10:30:00').getTime();
   const end = new Date('2026-03-26T11:15:00').getTime();
 
@@ -19,7 +19,7 @@ test('задача перекриває дві години', () => {
   expect(result[11].minutes).toBe(15);
 });
 
-test('задача перекриває три години', () => {
+test(() => {
   const start = new Date('2026-03-26T14:30:00').getTime();
   const end = new Date('2026-03-26T16:15:00').getTime();
 
@@ -30,7 +30,7 @@ test('задача перекриває три години', () => {
   expect(result[16].minutes).toBe(15);
 });
 
-test('порожній масив повертає 24 нульових години', () => {
+test(() => {
   const result = groupTasksByHour([]);
 
   expect(result).toHaveLength(24);

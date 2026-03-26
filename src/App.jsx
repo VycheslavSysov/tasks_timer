@@ -22,6 +22,7 @@ function App() {
         <Routes>
           <Route path="/" element={<TimerPage />} />
           <Route path="/log" element={<LogPage />} />
+          <Route path="/log/chart" element={<LogPage />} />
           <Route path="/tasks/:id" element={<TaskDetailsPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

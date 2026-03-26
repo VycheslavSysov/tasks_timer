@@ -1,6 +1,6 @@
 import generateTask from './generateTask';
 
-test('generateTask повертає object з правильними полями', () => {
+test( () => {
   const task = generateTask();
 
   expect(task).toHaveProperty('id');
