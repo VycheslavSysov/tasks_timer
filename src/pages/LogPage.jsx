@@ -67,14 +67,14 @@ export default function LogPage() {
                       <TableCell>
                         <button
                             onClick={() => navigate(`/tasks/${task.id}`)}
-                            className="h-7 min-w-16 rounded-[2px] border border-slate-200 bg-white px-3 text-[11px] font-semibold text-blue-600 shadow-[0_1px_2px_rgba(0,0,0,0.12)] hover:bg-slate-50"
+                            className="h-7 min-w-16 rounded-xs border border-slate-200 bg-white px-3 text-[11px] font-semibold text-blue-600 shadow-[0_1px_2px_rgba(0,0,0,0.12)] hover:bg-slate-50"
                         >INFO
                         </button>
                       </TableCell>
                       <TableCell>
                         <button
                             onClick={() => dispatch(deleteTask(task.id))}
-                            className="h-7 min-w-16 rounded-[2px] border border-slate-200 bg-white px-3 text-[11px] font-semibold text-blue-600 shadow-[0_1px_2px_rgba(0,0,0,0.12)] hover:bg-slate-50"
+                            className="h-7 min-w-16 rounded-xs border border-slate-200 bg-white px-3 text-[11px] font-semibold text-blue-600 shadow-[0_1px_2px_rgba(0,0,0,0.12)] hover:bg-slate-50"
                         >DELETE
                         </button>
                       </TableCell>
