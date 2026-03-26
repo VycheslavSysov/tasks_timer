@@ -7,12 +7,24 @@ import {
   TableRow,
   TableCell
 } from "@/components/ui/table.jsx";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
+import {addTask, clearTasks} from "@/store/tasksSlice.js";
+import generateTask from "@/utils/generateTask.js";
 
 export default function LogPage() {
   const tasks = useSelector(state => state.tasks);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleGenerate = () => {
+    dispatch(clearTasks());
+    const count = Math.floor(Math.random() * 6) + 10;
+
+    for (let i = 0; i < count; i++) {
+      dispatch(addTask(generateTask(i)));
+    }
+  };
 
   return (
       <div>
@@ -28,7 +40,9 @@ export default function LogPage() {
           </TableHeader>
           <TableBody>
             {tasks.map((task, index) => (
-                <TableRow key={task.id} onClick={() => navigate(`/tasks/${task.id}`)}>
+                <TableRow
+                    key={task.id} onClick={() => navigate(`/tasks/${task.id}`)}
+                >
                   <TableCell>{index + 1}</TableCell>
                   <TableCell>{task.name}</TableCell>
                   <TableCell>{new Date(task.startTime).toLocaleTimeString()}</TableCell>
@@ -38,6 +52,9 @@ export default function LogPage() {
             ))}
           </TableBody>
         </Table>
+        <div style={{textAlign: 'right', marginTop: '16px'}}>
+          <button onClick={handleGenerate}>GENERATE</button>
+        </div>
       </div>
   );
 }

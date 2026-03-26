@@ -8,14 +8,14 @@ const names = [
   'Сходити на прогулянку',
 ];
 
-export default function generateTask() {
+export default function generateTask(offset = 0) {
   const duration = Math.floor(Math.random() * (3600 - 60 + 1)) + 60;
-  const endTime = Date.now();
+  const endTime = Date.now() + offset;
   const startTime = endTime - duration * 1000;
   const name = names[Math.floor(Math.random() * names.length)];
 
   return {
-    id: Date.now(),
+    id: Date.now() + offset,
     name,
     startTime,
     endTime,
