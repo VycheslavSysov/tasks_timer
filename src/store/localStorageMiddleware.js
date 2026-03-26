@@ -10,7 +10,9 @@ const localStorageMiddleware = store => next => action => {
     localStorage.removeItem('isRunning');
     localStorage.removeItem('startTime');
   }
-  if (action.type === 'tasks/addTask') {
+  if (action.type === 'tasks/addTask' ||
+      action.type === 'tasks/deleteTask' ||
+      action.type === 'tasks/clearTask') {
     localStorage.setItem('tasks', JSON.stringify(state.tasks));
   }
   return result;
