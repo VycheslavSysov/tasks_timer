@@ -37,7 +37,7 @@ function TableBody({
   return (
       <tbody
           data-slot="table-body"
-          className={cn("[&_tr:last-child]:border-0 [&>tr]:text-blue-700 [&>tr]:bg-sky-100/80 [&>tr:nth-child(odd)]:bg-sky-200/45",
+          className={cn("[&>tr]:text-xs [&_tr:last-child]:border-0 [&>tr]:text-blue-700 [&>tr]:bg-sky-100/80 [&>tr:nth-child(odd)]:bg-sky-200/45",
               className
           )}
           {...props} />

@@ -19,6 +19,7 @@ import {
   XAxis,
   YAxis,
   Tooltip,
+  Legend,
   ResponsiveContainer
 } from "recharts";
 
@@ -90,14 +91,20 @@ export default function LogPage() {
                 <XAxis dataKey="hour" />
                 <YAxis />
                 <Tooltip />
-                <Bar dataKey="minutes" fill="#94a3b8" />
+                <Legend formatter={(value) => <span style={{ color: 'black' }}>{value}</span>} />
+                <Bar dataKey="minutes" name="Minutes in this hours" fill="#2a78e8" />
               </BarChart>
             </ResponsiveContainer>
         )}
 
         {location.pathname === '/log/chart' && (
             <div style={{textAlign: 'right', marginTop: '16px'}}>
-              <button onClick={handleGenerate}>GENERATE</button>
+              <button
+                  onClick={handleGenerate}
+                  className="h-7 min-w-16 rounded-xs border border-slate-200 bg-white px-3 text-[11px] font-semibold text-blue-600 shadow-[0_1px_2px_rgba(0,0,0,0.12)] hover:bg-slate-50"
+              >
+                GENERATE
+              </button>
             </div>
         )}
       </div>

@@ -9,6 +9,7 @@ function Timer() {
   const dispatch = useDispatch();
   const isRunning  = useSelector(state => state.timer.isRunning);
   const startTime = useSelector(state => state.timer.startTime);
+  const [showModal, setShowModal] = useState(false);
 
   const [taskName, setTaskName] = useState('');
   const [elapsedSeconds, setElapsedSeconds] = useState(() => {
@@ -23,7 +24,7 @@ function Timer() {
 
   const handleStop = () => {
     if (!taskName) {
-      alert('Введи назву задачі!')
+      setShowModal(true);
       return;
     }
     dispatch(addTask({
@@ -65,10 +66,30 @@ return (
 
     <button
         onClick={isRunning ? handleStop : handleStart}
-        className="border border-gray-400 px-6 py-1 text-sm text-gray-600 hover:bg-gray-100 transition-colors"
+        className="h-7 min-w-16 rounded-xs border border-slate-200 bg-white px-3 text-[11px] font-semibold text-blue-600 shadow-[0_1px_2px_rgba(0,0,0,0.12)] hover:bg-slate-50"
     >
       {isRunning ? 'STOP' : 'START'}
     </button>
+    {showModal && (
+        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg shadow-xl p-8 w-120 max-w-[90vw]">
+            <h2 className="text-xl font-semibold text-red-700 mb-3">
+              Empty task name
+            </h2>
+            <p className="text-gray-600 mb-6">
+              You are trying close your task without name, enter the title and try again!
+            </p>
+            <div className="flex justify-end">
+              <button
+                  onClick={() => setShowModal(false)}
+                  className="text-cyan-500 font-semibold text-sm hover:text-cyan-600"
+              >
+                CLOSE
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
   </div>
 );
 }

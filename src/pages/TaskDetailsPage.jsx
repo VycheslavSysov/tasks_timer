@@ -23,7 +23,11 @@ export default function TaskDetailsPage() {
 
   return (
       <div>
-        <button onClick={() => navigate('/')}>Back</button>
+        <button onClick={() => navigate('/')}
+          className="h-7 min-w-16 rounded-xs border border-slate-200 bg-white px-3 text-[11px] font-semibold text-blue-600 shadow-[0_1px_2px_rgba(0,0,0,0.12)] hover:bg-slate-50"
+        >
+          Back
+        </button>
         <p>Назва: {task.name}</p>
         <p>Початок: {new Date(task.startTime).toLocaleTimeString()}</p>
         <p>Кінець: {new Date(task.endTime).toLocaleTimeString()}</p>
