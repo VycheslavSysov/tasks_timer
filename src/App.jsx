@@ -2,7 +2,6 @@ import {useLocation, Routes, Route, useNavigate, Navigate} from "react-router-do
 import {Tabs, TabsList, TabsTrigger} from "@/components/ui/tabs.jsx";
 import TaskDetailsPage from "./pages/TaskDetailsPage";
 import Timer from "./components/Timer";
-import TimerPage from "./pages/TimerPage";
 import LogPage from "./pages/LogPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
