@@ -9,7 +9,7 @@ const names = [
 ];
 
 export default function generateTask(offset = 0) {
-  const duration = Math.floor(Math.random() * (3600 - 60 + 1)) + 60;
+  const duration = Math.floor(Math.random() * (90 * 60 - 10 * 60 + 1)) + 10 * 60;
   const endTime = Date.now() + offset;
   const startTime = endTime - duration * 1000;
   const name = names[Math.floor(Math.random() * names.length)];

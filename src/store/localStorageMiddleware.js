@@ -12,7 +12,7 @@ const localStorageMiddleware = store => next => action => {
   }
   if (action.type === 'tasks/addTask' ||
       action.type === 'tasks/deleteTask' ||
-      action.type === 'tasks/clearTask') {
+      action.type === 'tasks/clearTasks') {
     localStorage.setItem('tasks', JSON.stringify(state.tasks));
   }
   return result;

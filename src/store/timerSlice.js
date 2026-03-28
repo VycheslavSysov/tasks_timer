@@ -20,16 +20,11 @@ const timerSlice = createSlice({
     stopTimer: (state) => {
       state.startTime = null;
       state.isRunning = false;
-      state.taskName = '';
-      },
-
-    setTaskName: (state, action) => {
-      state.taskName = action.payload;
       },
   },
 });
 
-export const {startTimer, stopTimer, setTaskName} = timerSlice.actions;
+export const {startTimer, stopTimer} = timerSlice.actions;
 export default timerSlice.reducer;
 
 

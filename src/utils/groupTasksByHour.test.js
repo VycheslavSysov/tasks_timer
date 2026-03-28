@@ -1,6 +1,6 @@
 import groupTasksByHour from './groupTasksByHour';
 
-test(() => {
+test('groups a task within a single hour',() => {
   const start = new Date('2026-03-26T10:15:00').getTime();
   const end = new Date('2026-03-26T10:45:00').getTime();
 
@@ -9,7 +9,7 @@ test(() => {
   expect(result[10].minutes).toBe(30);
 });
 
-test(() => {
+test('splits a task between two hours',() => {
   const start = new Date('2026-03-26T10:30:00').getTime();
   const end = new Date('2026-03-26T11:15:00').getTime();
 
@@ -19,7 +19,7 @@ test(() => {
   expect(result[11].minutes).toBe(15);
 });
 
-test(() => {
+test('splits a task across multiple hours',() => {
   const start = new Date('2026-03-26T14:30:00').getTime();
   const end = new Date('2026-03-26T16:15:00').getTime();
 
@@ -30,7 +30,7 @@ test(() => {
   expect(result[16].minutes).toBe(15);
 });
 
-test('порожній масив повертає 24 нульових години', () => {
+test('returns 24 zero-hour buckets for an empty array', () => {
   const result = groupTasksByHour([]);
 
   expect(result).toHaveLength(24);

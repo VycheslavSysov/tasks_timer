@@ -15,7 +15,7 @@ const tasksSlice = createSlice({
     deleteTask: (state, action) => {
       return state.filter((task) => task.id !== action.payload);
     },
-    clearTasks: (state) => {
+    clearTasks: () => {
       return [];
     }
   },

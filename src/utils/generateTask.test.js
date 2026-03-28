@@ -1,6 +1,6 @@
 import generateTask from './generateTask';
 
-test( () => {
+test('generateTask returns a valid task object',() => {
   const task = generateTask();
 
   expect(task).toHaveProperty('id');

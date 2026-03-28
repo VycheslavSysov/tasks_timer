@@ -12,7 +12,6 @@ import {useLocation, useNavigate} from "react-router-dom";
 import {addTask, clearTasks, deleteTask} from "@/store/tasksSlice.js";
 import generateTask from "@/utils/generateTask.js";
 import groupTasksByHour from "@/utils/groupTasksByHour.js";
-import {Tabs, TabsList, TabsTrigger} from "@/components/ui/tabs.jsx";
 import {
   BarChart,
   Bar,
@@ -25,7 +24,8 @@ import {
 
 
 export default function LogPage() {
-  const tasks = useSelector(state => state.tasks);
+  const selectedTasks = useSelector(state => state.tasks);
+  const tasks = Array.isArray(selectedTasks) ? selectedTasks : [];
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
